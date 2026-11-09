@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кирилл и Анастасия — Свадебное приглашение</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Montserrat"', 'sans-serif'],
+                    },
+                    colors: {
+                        pureWhite: '#ffffff',
+                        mistBg: '#f8f9fa',
+                        cardBg: '#ffffff',
+                        paperSoft: '#f1f3f5',
+                        silverLine: '#e5e7eb',
+                        silverBorder: '#d1d5db',
+                        slateTone: '#6b7280',
+                        graphiteDark: '#1f2937',
+                        midnightText: '#111827',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #1f2937;
+            overflow-x: hidden;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.02em;
+        }
+        /* Custom minimalist scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f8f9fa;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+        /* Glassmorphism */
+        .glass-light {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(229, 231, 235, 0.9);
+        }
+        .editorial-shadow {
+            box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.07), 0 0 1px 1px rgba(229, 231, 235, 0.8);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.05);
+        }
+        .fade-in-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in-element.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .pulsing-audio {
+            animation: pulse-ring 2.2s infinite;
+        }
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(17, 24, 39, 0.15); }
+            70% { box-shadow: 0 0 0 10px rgba(17, 24, 39, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(17, 24, 39, 0); }
+        }
+    </style>
+</head>
+<body class="selection:bg-gray-900 selection:text-white relative bg-[#f8f9fa]">
+
+    <!-- Ambient Audio Control Button -->
+    <div class="fixed top-5 right-5 z-50 flex items-center gap-3">
+        <button id="musicToggle" class="w-11 h-11 rounded-full glass-light flex items-center justify-center text-graphiteDark hover:text-midnightText border border-silverBorder shadow-sm transition-all duration-300 group hover:scale-105 active:scale-95" title="Включить / приостановить фоновую музыку">
+            <i id="musicIcon" class="fa-solid fa-play text-xs pl-0.5 text-slateTone group-hover:text-midnightText transition-colors"></i>
+        </button>
+    </div>
+
+    <!-- Minimalist Editorial Light Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-40 bg-white/95 backdrop-blur-md border-b border-silverLine transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#hero" class="font-serif text-xl tracking-[0.25em] uppercase font-light text-midnightText">
+                К <span class="text-slateTone mx-1">•</span> А
+            </a>
+            <nav class="hidden md:flex items-center space-x-9 text-[11px] uppercase tracking-[0.25em] font-medium text-slateTone">
+                <a href="#welcome" class="hover:text-midnightText transition-colors">О нас</a>
+                <a href="#story" class="hover:text-midnightText transition-colors">Love Story</a>
+                <a href="#venue" class="hover:text-midnightText transition-colors">Локация</a>
+                <a href="#dresscode" class="hover:text-midnightText transition-colors">Дресс-код</a>
+                <a href="#details" class="hover:text-midnightText transition-colors">Детали</a>
+                <a href="#rsvp" class="px-5 py-2 border border-midnightText text-midnightText hover:bg-midnightText hover:text-white transition-all duration-300 rounded-sm">RSVP</a>
+            </nav>
+            <a href="#rsvp" class="md:hidden text-xs uppercase tracking-widest font-semibold text-midnightText border-b border-midnightText pb-0.5">
+                RSVP
+            </a>
+        </div>
+    </header>
+
+    <!-- SECTION 1: HERO -->
+    <section id="hero" class="min-h-screen pt-24 pb-16 flex items-center justify-center relative px-4 sm:px-6 bg-gradient-to-b from-white via-mistBg to-white">
+        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center relative z-10">
+            
+            <!-- Left Editorial Text Column -->
+            <div class="lg:col-span-5 text-center lg:text-left order-2 lg:order-1 fade-in-element">
+                <div class="inline-flex items-center gap-3 mb-5">
+                    <span class="w-8 h-[1px] bg-slateTone/40"></span>
+                    <span class="uppercase tracking-[0.3em] text-[10px] text-slateTone font-semibold">Свадебное приглашение</span>
+                    <span class="w-8 h-[1px] bg-slateTone/40"></span>
+                </div>
+                
+                <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl leading-tight font-light text-midnightText tracking-tight mb-3">
+                    Кирилл <br class="hidden sm:inline">
+                    <span class="text-3xl sm:text-4xl md:text-5xl text-slateTone lowercase font-light">и</span> Анастасия
+                </h1>
+
+                <p class="text-xs uppercase tracking-[0.3em] text-slateTone mb-6 font-medium">
+                    Суббота, 22 августа 2026 года
+                </p>
+
+                <p class="font-serif text-lg sm:text-xl text-graphiteDark/90 mb-8 max-w-md mx-auto lg:mx-0 leading-relaxed font-light">
+                    «Два сердца, одна дорога и особенный день, который мы счастливы разделить с вами.»
+                </p>
+
+                <!-- Actions: RSVP & Calendar -->
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
+                    <a href="#rsvp" class="w-full sm:w-auto px-8 py-3.5 bg-midnightText text-white text-xs uppercase tracking-[0.2em] font-semibold hover:bg-gray-800 transition-all duration-300 rounded-sm shadow-md text-center">
+                        Подтвердить присутствие
+                    </a>
+                    <button id="addToCalBtn" class="w-full sm:w-auto px-6 py-3.5 border border-silverBorder text-midnightText hover:border-midnightText bg-white text-xs uppercase tracking-[0.2em] font-medium transition-all duration-300 rounded-sm text-center flex items-center justify-center gap-2 shadow-sm">
+                        <i class="fa-regular fa-calendar-plus text-xs text-slateTone"></i>
+                        <span>В календарь</span>
+                    </button>
+                </div>
+
+                <!-- Live Countdown in Crisp White Cards -->
+                <div class="border-t border-silverLine pt-6">
+                    <div class="text-[10px] uppercase tracking-[0.25em] text-slateTone mb-3">До свадебного дня осталось:</div>
+                    <div class="grid grid-cols-4 gap-2.5 text-center max-w-sm mx-auto lg:mx-0">
+                        <div class="p-3 rounded-sm bg-white border border-silverLine shadow-sm">
+                            <span id="days" class="font-serif text-2xl sm:text-3xl font-light text-midnightText">00</span>
+                            <div class="text-[9px] uppercase tracking-wider text-slateTone mt-0.5">дней</div>
+                        </div>
+                        <div class="p-3 rounded-sm bg-white border border-silverLine shadow-sm">
+                            <span id="hours" class="font-serif text-2xl sm:text-3xl font-light text-midnightText">00</span>
+                            <div class="text-[9px] uppercase tracking-wider text-slateTone mt-0.5">часов</div>
+                        </div>
+                        <div class="p-3 rounded-sm bg-white border border-silverLine shadow-sm">
+                            <span id="minutes" class="font-serif text-2xl sm:text-3xl font-light text-midnightText">00</span>
+                            <div class="text-[9px] uppercase tracking-wider text-slateTone mt-0.5">минут</div>
+                        </div>
+                        <div class="p-3 rounded-sm bg-white border border-silverLine shadow-sm">
+                            <span id="seconds" class="font-serif text-2xl sm:text-3xl font-light text-midnightText">00</span>
+                            <div class="text-[9px] uppercase tracking-wider text-slateTone mt-0.5">секунд</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Photo Container with Reliable Fallback and Image Picker -->
+            <div class="lg:col-span-7 order-1 lg:order-2 flex justify-center fade-in-element">
+                <div class="relative w-full max-w-md sm:max-w-lg lg:max-w-xl">
+                    <div class="absolute -inset-3 sm:-inset-4 border border-silverBorder -z-10 translate-x-2 translate-y-2 pointer-events-none rounded"></div>
+                    
+                    <div class="overflow-hidden rounded bg-white p-2.5 sm:p-3.5 editorial-shadow border border-silverLine group">
+                        
+                        <!-- Main Couple Photo Frame: Vertical Aspect Ratio 3:4 with top focus -->
+                        <div class="relative w-full aspect-[3/4] overflow-hidden bg-mistBg rounded-sm flex items-center justify-center">
+                            
+                            <!-- Real Couple Photo with top-anchored object position (faces never cropped) -->
+                            <img 
+                                id="coupleImg" 
+                                src="Gemini_Generated_Image_6b2kb36b2kb36b2k_2.jfif" 
+                                alt="Кирилл и Анастасия" 
+                                class="w-full h-full object-cover object-top grayscale contrast-105 transition-transform duration-700 group-hover:scale-[1.02]"
+                                onerror="if(this.src.indexOf('Gemini_Generated_Image_6b2kb36b2kb36b2k.jfif') === -1) { this.src='Gemini_Generated_Image_6b2kb36b2kb36b2k.jfif'; }"
+                            >
+
+                            <!-- Subtle Vignette / Photo Accent -->
+                            <div class="absolute inset-0 ring-1 ring-inset ring-black/5 pointer-events-none"></div>
+                        </div>
+
+                        <!-- Editorial photo caption -->
+                        <div class="pt-3 pb-1 px-2 flex items-center justify-between text-slateTone border-t border-silverLine/60 mt-2">
+                            <span class="font-serif text-sm text-midnightText tracking-wider">Кирилл и Анастасия</span>
+                            <span class="text-[10px] uppercase tracking-[0.2em] font-medium">22 . 08 . 2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 2: WORDS TO GUESTS -->
+    <section id="welcome" class="py-24 bg-white relative border-y border-silverLine">
+        <div class="max-w-4xl mx-auto px-6 text-center fade-in-element">
+            <div class="w-14 h-14 mx-auto mb-6 flex items-center justify-center rounded-full border border-silverBorder text-slateTone bg-mistBg shadow-sm">
+                <i class="fa-regular fa-heart text-base"></i>
+            </div>
+            
+            <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-midnightText mb-4">
+                Дорогие и любимые наши гости!
+            </h2>
+            
+            <div class="w-16 h-[1px] bg-silverBorder mx-auto mb-8"></div>
+
+            <p class="font-serif text-xl sm:text-2xl text-graphiteDark leading-relaxed font-light mb-6">
+                В жизни каждого человека есть день, который хочется сохранить в памяти навсегда. Для нас это день, когда мы скажем друг другу самое главное обещание.
+            </p>
+
+            <p class="text-sm sm:text-base text-slateTone max-w-2xl mx-auto leading-relaxed mb-8 font-light">
+                Любовь умножается, когда ею делятся. Вы — наши самые близкие и дорогие люди, с кем мы прошли через важные события жизни. Ваша поддержка, искренние объятия и улыбки сделают этот день по-настоящему теплым и светлым. Мы приглашаем вас стать частью нашей свадебной сказки!
+            </p>
+
+            <div class="font-serif text-2xl text-midnightText">
+                С любовью и глубоким уважением, <br>
+                <span class="text-midnightText font-normal tracking-wide">Кирилл и Анастасия</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: LOVE STORY TIMELINE -->
+    <section id="story" class="py-24 px-6 max-w-5xl mx-auto">
+        <div class="text-center mb-16 fade-in-element">
+            <span class="text-xs uppercase tracking-[0.3em] text-slateTone font-semibold">Хроника чувств</span>
+            <h2 class="font-serif text-4xl sm:text-5xl font-light text-midnightText mt-2 mb-4">История нашей любви</h2>
+            <div class="w-16 h-[1px] bg-silverBorder mx-auto"></div>
+        </div>
+
+        <div class="relative border-l border-silverBorder sm:mx-auto sm:max-w-3xl pl-6 sm:pl-10 space-y-12">
+            
+            <!-- Timeline Item 1 -->
+            <div class="relative fade-in-element">
+                <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-white border-2 border-slateTone flex items-center justify-center shadow-sm">
+                    <div class="w-1.5 h-1.5 rounded-full bg-midnightText"></div>
+                </div>
+                <div class="text-[11px] uppercase tracking-widest text-slateTone font-semibold mb-1">Сентябрь 2021</div>
+                <h3 class="font-serif text-2xl text-midnightText font-normal mb-2">Первая встреча</h3>
+                <p class="text-slateTone text-sm sm:text-base leading-relaxed font-light">
+                    Случайный разговор, который затянулся до самого утра. В тот вечер стало ясно: впереди — нечто удивительное и судьбоносное.
+                </p>
+            </div>
+
+            <!-- Timeline Item 2 -->
+            <div class="relative fade-in-element">
+                <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-white border-2 border-slateTone flex items-center justify-center shadow-sm">
+                    <div class="w-1.5 h-1.5 rounded-full bg-midnightText"></div>
+                </div>
+                <div class="text-[11px] uppercase tracking-widest text-slateTone font-semibold mb-1">Июль 2023</div>
+                <h3 class="font-serif text-2xl text-midnightText font-normal mb-2">Первое совместное путешествие</h3>
+                <p class="text-slateTone text-sm sm:text-base leading-relaxed font-light">
+                    Сотни километров дорог, вдохновение и простое понимание: дом там, где мы вдвоем.
+                </p>
+            </div>
+
+            <!-- Timeline Item 3 -->
+            <div class="relative fade-in-element">
+                <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-white border-2 border-slateTone flex items-center justify-center shadow-sm">
+                    <div class="w-1.5 h-1.5 rounded-full bg-midnightText"></div>
+                </div>
+                <div class="text-[11px] uppercase tracking-widest text-slateTone font-semibold mb-1">Декабрь 2025</div>
+                <h3 class="font-serif text-2xl text-midnightText font-normal mb-2">Предложение руки и сердца</h3>
+                <p class="text-slateTone text-sm sm:text-base leading-relaxed font-light">
+                    Тот самый вечер, стук сердец в унисон, кольцо и самое счастливое и уверенное «Да!», открывшее новую главу нашей общей жизни.
+                </p>
+            </div>
+
+            <!-- Timeline Item 4 -->
+            <div class="relative fade-in-element">
+                <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-midnightText border-2 border-white flex items-center justify-center shadow">
+                    <div class="w-1.5 h-1.5 rounded-full bg-white"></div>
+                </div>
+                <div class="text-[11px] uppercase tracking-widest text-midnightText font-bold mb-1">22 Августа 2026</div>
+                <h3 class="font-serif text-2xl text-midnightText font-semibold mb-2">День нашей свадьбы</h3>
+                <p class="text-slateTone text-sm sm:text-base leading-relaxed font-light">
+                    Момент, когда мы скрепим наш союз клятвами любви и верности в кругу самых близких людей.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 4: VENUE & SCHEDULE (Arzamas, Lion Cafe) -->
+    <section id="venue" class="py-24 bg-white border-y border-silverLine">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in-element">
+                <span class="text-xs uppercase tracking-[0.3em] text-slateTone font-semibold">Локация</span>
+                <h2 class="font-serif text-4xl sm:text-5xl font-light text-midnightText mt-2 mb-4">Место проведения и программа</h2>
+                <div class="w-16 h-[1px] bg-silverBorder mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Venue Card -->
+                <div class="lg:col-span-5 bg-mistBg p-8 sm:p-10 rounded-sm border border-silverBorder editorial-shadow fade-in-element">
+                    <div class="inline-block p-3 rounded-full bg-white border border-silverBorder text-midnightText mb-6 shadow-sm">
+                        <i class="fa-solid fa-champagne-glasses text-lg"></i>
+                    </div>
+
+                    <h3 class="font-serif text-3xl text-midnightText mb-2">Кафе «Lion» (Лион)</h3>
+                    <p class="text-xs uppercase tracking-widest text-slateTone font-medium mb-6">Банкетный комплекс и летняя веранда</p>
+
+                    <div class="space-y-4 text-sm text-graphiteDark mb-8 font-light">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-slateTone text-base mt-1"></i>
+                            <div>
+                                <strong class="block text-midnightText font-medium">г. Арзамас</strong>
+                                <span class="text-slateTone">Нижегородская область, кафе «Лион»</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-regular fa-clock text-slateTone text-base mt-1"></i>
+                            <div>
+                                <strong class="block text-midnightText font-medium">Сбор гостей</strong>
+                                <span class="text-slateTone">15:30 — Welcome drink и фуршет</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-car text-slateTone text-base mt-1"></i>
+                            <div>
+                                <strong class="block text-midnightText font-medium">Трансфер и парковка</strong>
+                                <span class="text-slateTone">Удобный подъезд, охраняемая парковка, возможность трансфера по анкете</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Action -->
+                    <div class="pt-5 border-t border-silverBorder/80 flex flex-col gap-3">
+                        <a 
+                            href="https://yandex.ru/maps/?text=Арзамас+кафе+Лион" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            class="w-full text-center py-3.5 bg-midnightText text-white text-xs uppercase tracking-widest font-semibold rounded-sm hover:bg-gray-800 transition-all duration-300 flex items-center justify-center gap-2 shadow"
+                        >
+                            <i class="fa-solid fa-location-arrow text-xs"></i>
+                            <span>Открыть в Яндекс Картах</span>
+                        </a>
+                        <p class="text-[11px] text-center text-slateTone">
+                            При въезде гостей встречает свадебный координатор.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Timing Schedule -->
+                <div class="lg:col-span-7 space-y-4 fade-in-element">
+                    <h3 class="font-serif text-2xl text-midnightText mb-6 border-b border-silverLine pb-3">
+                        Распорядок свадебного дня
+                    </h3>
+
+                    <div class="flex gap-5 items-start bg-white p-5 rounded-sm border border-silverLine card-shadow hover:border-slateTone/40 transition-colors">
+                        <div class="font-serif text-xl sm:text-2xl font-light text-midnightText w-16 text-right shrink-0">
+                            15:30
+                        </div>
+                        <div class="w-[1px] h-12 bg-silverBorder self-center"></div>
+                        <div>
+                            <h4 class="font-serif text-xl text-midnightText font-medium">Welcome и встреча гостей</h4>
+                            <p class="text-xs sm:text-sm text-slateTone mt-1 font-light">
+                                Аперитив, прохладительные напитки, фотозона и легкая инструментальная музыка.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-5 items-start bg-white p-5 rounded-sm border border-silverLine card-shadow hover:border-slateTone/40 transition-colors">
+                        <div class="font-serif text-xl sm:text-2xl font-light text-midnightText w-16 text-right shrink-0">
+                            16:30
+                        </div>
+                        <div class="w-[1px] h-12 bg-silverBorder self-center"></div>
+                        <div>
+                            <h4 class="font-serif text-xl text-midnightText font-medium">Торжественная церемония</h4>
+                            <p class="text-xs sm:text-sm text-slateTone mt-1 font-light">
+                                Самый трепетный момент дня: обмен клятвами любви и кольцами.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-5 items-start bg-white p-5 rounded-sm border border-silverLine card-shadow hover:border-slateTone/40 transition-colors">
+                        <div class="font-serif text-xl sm:text-2xl font-light text-midnightText w-16 text-right shrink-0">
+                            17:30
+                        </div>
+                        <div class="w-[1px] h-12 bg-silverBorder self-center"></div>
+                        <div>
+                            <h4 class="font-serif text-xl text-midnightText font-medium">Праздничный банкет</h4>
+                            <p class="text-xs sm:text-sm text-slateTone mt-1 font-light">
+                                Гастрономический ужин в кафе «Lion», теплые поздравления, танцы и праздничная программа.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-5 items-start bg-white p-5 rounded-sm border border-silverLine card-shadow hover:border-slateTone/40 transition-colors">
+                        <div class="font-serif text-xl sm:text-2xl font-light text-midnightText w-16 text-right shrink-0">
+                            21:30
+                        </div>
+                        <div class="w-[1px] h-12 bg-silverBorder self-center"></div>
+                        <div>
+                            <h4 class="font-serif text-xl text-midnightText font-medium">Свадебный торт и завершение вечера</h4>
+                            <p class="text-xs sm:text-sm text-slateTone mt-1 font-light">
+                                Сладкий финал, бенгальские огни и танцы.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: DRESS CODE (Monochrome Luxury: No Blues, No Yellows) -->
+    <section id="dresscode" class="py-24 px-6 max-w-4xl mx-auto text-center">
+        <div class="fade-in-element">
+            <span class="text-xs uppercase tracking-[0.3em] text-slateTone font-semibold">Стиль и гармония</span>
+            <h2 class="font-serif text-4xl sm:text-5xl font-light text-midnightText mt-2 mb-4">Дресс-код</h2>
+            <div class="w-16 h-[1px] bg-silverBorder mx-auto mb-6"></div>
+
+            <p class="font-serif text-2xl text-midnightText mb-4 font-light">
+                Black Tie и Silver Monochrome Chic
+            </p>
+
+            <p class="text-sm sm:text-base text-slateTone max-w-2xl mx-auto leading-relaxed mb-10 font-light">
+                Мы будем искренне признательны, если при выборе нарядов вы отдадите предпочтение сдержанной монохромной палитре: элегантные костюмы, смокинги и вечерние платья в оттенках жемчуга, серебра, платины, графита и глубокого черного.
+            </p>
+
+            <!-- Cold Monochrome Palette (No blues, No yellows) -->
+            <div class="flex flex-wrap justify-center items-center gap-6 sm:gap-8 mb-10">
+                <!-- Color 1: Snow White -->
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div class="w-14 h-14 rounded-full border-2 border-silverBorder shadow-sm transition-transform group-hover:scale-110" style="background-color: #ffffff;"></div>
+                    <span class="text-[10px] text-slateTone uppercase tracking-wider mt-2.5 font-medium group-hover:text-midnightText transition-colors">Жемчужный</span>
+                </div>
+                <!-- Color 2: Pure Silver -->
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div class="w-14 h-14 rounded-full border border-silverBorder shadow-sm transition-transform group-hover:scale-110" style="background-color: #e5e7eb;"></div>
+                    <span class="text-[10px] text-slateTone uppercase tracking-wider mt-2.5 font-medium group-hover:text-midnightText transition-colors">Серебро</span>
+                </div>
+                <!-- Color 3: Platinum -->
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div class="w-14 h-14 rounded-full border border-silverBorder shadow-sm transition-transform group-hover:scale-110" style="background-color: #9ca3af;"></div>
+                    <span class="text-[10px] text-slateTone uppercase tracking-wider mt-2.5 font-medium group-hover:text-midnightText transition-colors">Платина</span>
+                </div>
+                <!-- Color 4: Charcoal Gray -->
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div class="w-14 h-14 rounded-full border border-silverBorder shadow-sm transition-transform group-hover:scale-110" style="background-color: #4b5563;"></div>
+                    <span class="text-[10px] text-slateTone uppercase tracking-wider mt-2.5 font-medium group-hover:text-midnightText transition-colors">Антрацит</span>
+                </div>
+                <!-- Color 5: Deep Graphite -->
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div class="w-14 h-14 rounded-full border border-silverBorder shadow-sm transition-transform group-hover:scale-110" style="background-color: #1f2937;"></div>
+                    <span class="text-[10px] text-slateTone uppercase tracking-wider mt-2.5 font-medium group-hover:text-midnightText transition-colors">Графит</span>
+                </div>
+                <!-- Color 6: Pure Black -->
+                <div class="flex flex-col items-center group cursor-pointer">
+                    <div class="w-14 h-14 rounded-full border border-silverBorder shadow-sm transition-transform group-hover:scale-110" style="background-color: #000000;"></div>
+                    <span class="text-[10px] text-slateTone uppercase tracking-wider mt-2.5 font-medium group-hover:text-midnightText transition-colors">Черный</span>
+                </div>
+            </div>
+
+            <!-- Recommendation Alert -->
+            <div class="bg-white p-6 rounded-sm max-w-xl mx-auto border border-silverBorder text-xs text-slateTone leading-relaxed card-shadow">
+                <i class="fa-solid fa-circle-info text-midnightText mr-1.5"></i>
+                Дорогие девушки, пожалуйста, оставьте белоснежный цвет для подвенечного платья невесты. Мы также просим воздержаться от ярких неоновых и цветных узоров.
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: DETAILS -->
+    <section id="details" class="py-20 bg-white border-y border-silverLine">
+        <div class="max-w-4xl mx-auto px-6 text-center fade-in-element">
+            <span class="text-xs uppercase tracking-[0.3em] text-slateTone font-semibold">Пожелания</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-light text-midnightText mt-2 mb-8">Детали для вашего комфорта</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                <!-- Gifts Note -->
+                <div class="bg-mistBg p-7 rounded-sm border border-silverBorder card-shadow">
+                    <div class="text-midnightText text-xl mb-3"><i class="fa-solid fa-gift"></i></div>
+                    <h4 class="font-serif text-xl text-midnightText mb-2">О подарках</h4>
+                    <p class="text-xs sm:text-sm text-slateTone leading-relaxed font-light">
+                        Главный подарок для нас — ваше присутствие и искренние пожелания. Если вы хотите сделать свадебный подарок, мы будем очень благодарны вкладу в конверте в бюджет нашего будущего семейного путешествия.
+                    </p>
+                </div>
+
+                <!-- Flowers & Wine -->
+                <div class="bg-mistBg p-7 rounded-sm border border-silverBorder card-shadow">
+                    <div class="text-midnightText text-xl mb-3"><i class="fa-solid fa-wine-bottle"></i></div>
+                    <h4 class="font-serif text-xl text-midnightText mb-2">О цветах и вине</h4>
+                    <p class="text-xs sm:text-sm text-slateTone leading-relaxed font-light">
+                        Сразу после торжества мы отправляемся в поездку и не успеем насладиться срезанными цветами. Вместо букетов вы можете порадовать нас бутылкой вашего любимого сухого вина с памятной подписью.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: RSVP GUEST FORM -->
+    <section id="rsvp" class="py-24 px-6 max-w-3xl mx-auto">
+        <div class="text-center mb-12 fade-in-element">
+            <span class="text-xs uppercase tracking-[0.3em] text-slateTone font-semibold">Анкета гостя</span>
+            <h2 class="font-serif text-4xl sm:text-5xl font-light text-midnightText mt-2 mb-3">Подтверждение присутствия</h2>
+            <p class="text-sm text-slateTone max-w-md mx-auto font-light">
+                Пожалуйста, подтвердите ваше участие до <strong>25 июля 2026 года</strong>, чтобы мы успели подготовить все детали праздничного вечера.
+            </p>
+            <div class="w-16 h-[1px] bg-silverBorder mx-auto mt-4"></div>
+        </div>
+
+        <form id="rsvpForm" class="bg-white p-8 sm:p-12 rounded-sm editorial-shadow border border-silverBorder space-y-7 fade-in-element">
+            
+            <!-- Guest Names -->
+            <div>
+                <label for="guestName" class="block text-xs uppercase tracking-wider font-semibold text-midnightText mb-2">
+                    Ваше имя и фамилия (и имя спутника) *
+                </label>
+                <input 
+                    type="text" 
+                    id="guestName" 
+                    name="guestName" 
+                    required 
+                    placeholder="Например: Иван и Анна Смирновы"
+                    class="w-full px-4 py-3.5 bg-mistBg border border-silverBorder rounded-sm text-sm text-midnightText focus:outline-none focus:border-midnightText transition-colors placeholder:text-slateTone/40"
+                >
+            </div>
+
+            <!-- Attendance Choice -->
+            <div>
+                <label class="block text-xs uppercase tracking-wider font-semibold text-midnightText mb-2">
+                    Сможете ли вы разделить с нами этот день? *
+                </label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <label class="flex items-center gap-3 p-3.5 bg-mistBg border border-silverBorder rounded-sm cursor-pointer hover:border-midnightText transition-colors">
+                        <input type="radio" name="attendance" value="one" checked class="accent-gray-900 h-4 w-4">
+                        <span class="text-xs font-medium text-midnightText">Буду с радостью</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3.5 bg-mistBg border border-silverBorder rounded-sm cursor-pointer hover:border-midnightText transition-colors">
+                        <input type="radio" name="attendance" value="couple" class="accent-gray-900 h-4 w-4">
+                        <span class="text-xs font-medium text-midnightText">Будем парой (+1)</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3.5 bg-mistBg border border-silverBorder rounded-sm cursor-pointer hover:border-midnightText transition-colors">
+                        <input type="radio" name="attendance" value="none" class="accent-gray-900 h-4 w-4">
+                        <span class="text-xs font-medium text-slateTone">К сожалению, нет</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Drink Preferences -->
+            <div id="drinksSection">
+                <label class="block text-xs uppercase tracking-wider font-semibold text-midnightText mb-2">
+                    Предпочтения по напиткам:
+                </label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-graphiteDark">
+                    <label class="flex items-center gap-2.5 p-3 rounded-sm bg-mistBg border border-silverBorder hover:border-slateTone cursor-pointer">
+                        <input type="checkbox" name="drinks" value="Игристое / Брют" class="accent-gray-900 rounded">
+                        <span>Игристое вино / Брют</span>
+                    </label>
+                    <label class="flex items-center gap-2.5 p-3 rounded-sm bg-mistBg border border-silverBorder hover:border-slateTone cursor-pointer">
+                        <input type="checkbox" name="drinks" value="Белое сухое вино" class="accent-gray-900 rounded">
+                        <span>Белое сухое вино</span>
+                    </label>
+                    <label class="flex items-center gap-2.5 p-3 rounded-sm bg-mistBg border border-silverBorder hover:border-slateTone cursor-pointer">
+                        <input type="checkbox" name="drinks" value="Красное сухое вино" class="accent-gray-900 rounded">
+                        <span>Красное сухое вино</span>
+                    </label>
+                    <label class="flex items-center gap-2.5 p-3 rounded-sm bg-mistBg border border-silverBorder hover:border-slateTone cursor-pointer">
+                        <input type="checkbox" name="drinks" value="Крепкие напитки" class="accent-gray-900 rounded">
+                        <span>Крепкие напитки (Коньяк / Виски)</span>
+                    </label>
+                    <label class="flex items-center gap-2.5 p-3 rounded-sm bg-mistBg border border-silverBorder hover:border-slateTone cursor-pointer sm:col-span-2">
+                        <input type="checkbox" name="drinks" value="Безалкогольные напитки" class="accent-gray-900 rounded">
+                        <span>Безалкогольные напитки (соки, лимонады)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Transfer -->
+            <div>
+                <label class="block text-xs uppercase tracking-wider font-semibold text-midnightText mb-2">
+                    Потребуется ли вам организованный трансфер до кафе «Lion»?
+                </label>
+                <div class="grid grid-cols-2 gap-3 text-xs">
+                    <label class="flex items-center gap-2.5 p-3 bg-mistBg border border-silverBorder rounded-sm cursor-pointer hover:border-midnightText">
+                        <input type="radio" name="transfer" value="yes" class="accent-gray-900">
+                        <span class="text-midnightText">Да, нужен трансфер</span>
+                    </label>
+                    <label class="flex items-center gap-2.5 p-3 bg-mistBg border border-silverBorder rounded-sm cursor-pointer hover:border-midnightText">
+                        <input type="radio" name="transfer" value="no" checked class="accent-gray-900">
+                        <span class="text-midnightText">Доберемся сами</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Wishes to the Couple -->
+            <div>
+                <label for="wishes" class="block text-xs uppercase tracking-wider font-semibold text-midnightText mb-2">
+                    Пожелания молодоженам:
+                </label>
+                <textarea 
+                    id="wishes" 
+                    name="wishes" 
+                    rows="3" 
+                    placeholder="Напишите пару теплых слов..."
+                    class="w-full px-4 py-3.5 bg-mistBg border border-silverBorder rounded-sm text-sm text-midnightText focus:outline-none focus:border-midnightText transition-colors placeholder:text-slateTone/40"
+                ></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button 
+                type="submit" 
+                class="w-full py-4 bg-midnightText text-white text-xs uppercase tracking-[0.25em] font-semibold hover:bg-gray-800 transition-all duration-300 rounded-sm shadow-md flex items-center justify-center gap-2 group"
+            >
+                <span>Отправить подтверждение</span>
+                <i class="fa-solid fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+            </button>
+        </form>
+    </section>
+
+    <!-- FOOTER / MONOGRAM -->
+    <footer class="py-16 bg-white text-center border-t border-silverLine">
+        <div class="max-w-xl mx-auto px-6">
+            <div class="font-serif text-3xl sm:text-4xl font-light tracking-[0.3em] text-midnightText mb-3">
+                К <span class="text-slateTone mx-2">•</span> А
+            </div>
+            <p class="text-xs uppercase tracking-[0.3em] text-slateTone mb-6 font-medium">
+                22 Августа 2026 • Арзамас
+            </p>
+            <div class="w-12 h-[1px] bg-silverBorder mx-auto mb-6"></div>
+            <p class="font-serif text-lg text-graphiteDark font-light">
+                «Счастливы разделить этот день с вами»
+            </p>
+            <div class="mt-8 text-[10px] uppercase tracking-widest text-slateTone/60">
+                Кирилл и Анастасия • 2026
+            </div>
+        </div>
+    </footer>
+
+    <!-- RSVP SUCCESS MODAL -->
+    <div id="rsvpModal" class="fixed inset-0 z-50 bg-gray-900/40 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white max-w-md w-full p-8 sm:p-10 rounded-sm shadow-2xl text-center transform scale-95 transition-transform duration-300 border border-silverBorder">
+            <div class="w-16 h-16 bg-mistBg rounded-full mx-auto flex items-center justify-center text-midnightText mb-6 border border-silverBorder">
+                <i class="fa-solid fa-check text-2xl"></i>
+            </div>
+            <h3 class="font-serif text-3xl text-midnightText mb-2">Благодарим вас!</h3>
+            <p id="modalGreeting" class="font-medium text-graphiteDark text-sm mb-3">Ваш ответ успешно получен.</p>
+            <p class="text-xs text-slateTone leading-relaxed mb-8 font-light">
+                Мы с радостью ждем вас 22 августа 2026 года в кафе «Lion», чтобы вместе отпраздновать это прекрасное событие!
+            </p>
+            <button id="closeModalBtn" class="w-full py-3 bg-midnightText text-white text-xs uppercase tracking-widest font-semibold rounded-sm hover:bg-gray-800 transition-colors shadow">
+                Закрыть
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Live Countdown Timer to 22 August 2026, 15:30 MSK
+        function initCountdown() {
+            const targetDate = new Date("August 22, 2026 15:30:00 GMT+0300").getTime();
+
+            const daysEl = document.getElementById("days");
+            const hoursEl = document.getElementById("hours");
+            const minEl = document.getElementById("minutes");
+            const secEl = document.getElementById("seconds");
+
+            function update() {
+                const now = new Date().getTime();
+                const diff = targetDate - now;
+
+                if (diff > 0) {
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                    daysEl.innerText = String(days).padStart(2, '0');
+                    hoursEl.innerText = String(hours).padStart(2, '0');
+                    minEl.innerText = String(minutes).padStart(2, '0');
+                    secEl.innerText = String(seconds).padStart(2, '0');
+                } else {
+                    daysEl.innerText = "00";
+                    hoursEl.innerText = "00";
+                    minEl.innerText = "00";
+                    secEl.innerText = "00";
+                }
+            }
+            update();
+            setInterval(update, 1000);
+        }
+
+        // Add to Calendar
+        function initCalendarButton() {
+            const btn = document.getElementById('addToCalBtn');
+            btn.addEventListener('click', () => {
+                const title = encodeURIComponent("Свадьба Кирилла и Анастасии");
+                const details = encodeURIComponent("Свадебное торжество в кафе Lion, г. Арзамас. Сбор гостей в 15:30.");
+                const location = encodeURIComponent("Арзамас, кафе Лион");
+                const startDate = "20260822T123000Z"; // 15:30 MSK
+                const endDate = "20260822T210000Z";
+
+                const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`;
+                window.open(googleUrl, '_blank');
+            });
+        }
+
+        // Smooth Fade-in on Scroll
+        function initScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in-element');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -30px 0px'
+            });
+
+            elements.forEach(el => observer.observe(el));
+        }
+
+        // Romantic Piano Harmony (Web Audio API)
+        let audioCtx = null;
+        let isPlaying = false;
+        let melodyInterval = null;
+
+        function initBackgroundMusic() {
+            const musicBtn = document.getElementById('musicToggle');
+            const musicIcon = document.getElementById('musicIcon');
+
+            const chords = [
+                [261.63, 329.63, 392.00, 493.88], // Cmaj7
+                [220.00, 261.63, 329.63, 392.00], // Am7
+                [174.61, 261.63, 329.63, 349.23], // Fmaj7
+                [196.00, 246.94, 293.66, 392.00]  // G
+            ];
+
+            let chordIndex = 0;
+            let noteIndex = 0;
+
+            function playGentleNote(freq) {
+                if (!audioCtx) return;
+                try {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+                    gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.03, audioCtx.currentTime + 0.08);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.9);
+
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 1.95);
+                } catch(e) {
+                    console.error("Audio error:", e);
+                }
+            }
+
+            function startMelody() {
+                melodyInterval = setInterval(() => {
+                    const currentChord = chords[chordIndex];
+                    const note = currentChord[noteIndex % currentChord.length];
+                    playGentleNote(note);
+
+                    noteIndex++;
+                    if (noteIndex % 4 === 0) {
+                        chordIndex = (chordIndex + 1) % chords.length;
+                    }
+                }, 540);
+            }
+
+            musicBtn.addEventListener('click', () => {
+                if (!audioCtx) {
+                    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                    if (AudioContextClass) {
+                        audioCtx = new AudioContextClass();
+                    }
+                }
+
+                if (audioCtx && audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                if (!isPlaying) {
+                    isPlaying = true;
+                    startMelody();
+                    musicIcon.classList.remove('fa-play');
+                    musicIcon.classList.add('fa-pause');
+                    musicBtn.classList.add('pulsing-audio', 'border-midnightText');
+                } else {
+                    isPlaying = false;
+                    clearInterval(melodyInterval);
+                    musicIcon.classList.remove('fa-pause');
+                    musicIcon.classList.add('fa-play');
+                    musicBtn.classList.remove('pulsing-audio', 'border-midnightText');
+                }
+            });
+        }
+
+        // RSVP Submission
+        function initRsvpForm() {
+            const form = document.getElementById('rsvpForm');
+            const modal = document.getElementById('rsvpModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const modalGreeting = document.getElementById('modalGreeting');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const nameInput = document.getElementById('guestName').value;
+                const attendance = form.querySelector('input[name="attendance"]:checked').value;
+
+                if (attendance !== 'none') {
+                    modalGreeting.innerHTML = `Дорогие <strong>${nameInput}</strong>, спасибо! Мы счастливы, что вы разделите этот праздник с нами!`;
+                } else {
+                    modalGreeting.innerHTML = `Дорогие <strong>${nameInput}</strong>, нам очень жаль, что вы не сможете быть, но мы чувствуем ваше тепло!`;
+                }
+
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modal.querySelector('div').classList.remove('scale-95');
+                modal.querySelector('div').classList.add('scale-100');
+
+                form.reset();
+            });
+
+            closeModalBtn.addEventListener('click', function() {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                modal.querySelector('div').classList.remove('scale-100');
+                modal.querySelector('div').classList.add('scale-95');
+            });
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModalBtn.click();
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initCountdown();
+            initCalendarButton();
+            initScrollAnimations();
+            initBackgroundMusic();
+            initRsvpForm();
+        });
+    </script>
+</body>
+</html>
